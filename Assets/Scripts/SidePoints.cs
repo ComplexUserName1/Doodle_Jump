@@ -9,7 +9,7 @@ public class SidePoints : MonoBehaviour
 
     [SerializeField] private bool _leftSide; //флаг для проверки левой стороны экрана
 
-    private void Update()
+    void Update()
     {
         if (_leftSide) //проверка левой стороны экрана
         {
@@ -27,5 +27,5 @@ public class SidePoints : MonoBehaviour
         }
     }
 
-    private void MoveToOppositePoint() => _target.position = new Vector2(_oppositePoint.position.x, _target.position.y); //присваиваем персонажу новую позицию по X
+    void MoveToOppositePoint() => _target.position = new Vector2(_oppositePoint.position.x, _target.position.y); //присваиваем персонажу новую позицию по X
 }

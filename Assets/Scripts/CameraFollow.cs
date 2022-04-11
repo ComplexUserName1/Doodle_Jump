@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform doodlePos; // позиция дудлика
+    [SerializeField] Transform doodlePos; // позиция дудлика
 
     void Update()
     {

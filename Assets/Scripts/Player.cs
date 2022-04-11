@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;                          // меня не забудь по
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] GameObject DeathMenu;  //меню смерти
+    [SerializeField] GameObject Finish;     //сам финиш
+    [SerializeField] GameObject FinishMenu; //меню финиша
     public static Player instance;                          // это штучка нужна, чтобы мы могли использовать переменные в этом скрипте в других скриптах
 
     float horizontal;                                       // переменная для акселерометра
@@ -21,6 +24,10 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (SceneManager.GetActiveScene().name == "Main_Menu") // если выбрана сцена главного меню, то метод FixedUpdate() не используется
+        {
+            enabled = false;
+        }
         if (Application.platform == RuntimePlatform.Android)    // если платформа Андроид
         {
             horizontal = Input.acceleration.x;                  // то подключаем акселерометр по оси х
@@ -39,11 +46,14 @@ public class Player : MonoBehaviour
         DoodleRigid.velocity = new Vector2(Input.acceleration.x * 10f, DoodleRigid.velocity.y);     //  добавляем силу к акселерометру, чтоб он не просто разворачивался в разные стороны
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)       // столкновение объекта
+    void OnCollisionEnter2D(Collision2D collision)       // столкновение объекта
     {
         if (collision.collider.name == "DeadZone")              // если дудлик сталкивается с объектом с именем "DeadZone"
         {
-            SceneManager.LoadScene(0);                          // то уровень перезагружается
+            Time.timeScale = 0;                                 //остонавливаем время игры
+            DeathMenu.SetActive(true);                          //включаем меню смерти для игрока
+            Finish.GetComponent<FinishEvent>().enabled = false; //отключаем скрипт FinishEvent
+            FinishMenu.SetActive(false);                        //отключаем GameObject FinishMenu
         }
     }
 }

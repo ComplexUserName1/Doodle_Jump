@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class PlatformGenerator : MonoBehaviour
 {
-    public GameObject platformPrefab;       // переменная для префаба
-    public GameObject platformPrefabHorizontal;
-    public GameObject platformPrefabVertical;
-    public GameObject BrokenPlatformPrefab;
-    [SerializeField] private Transform LeftPoint;
-    [SerializeField] private Transform RightPoint;
+    [SerializeField] GameObject platformPrefab;       // переменная для префаба обычной платформы
+    [SerializeField] GameObject platformPrefabHorizontal;   //переменная для префаба горизонтальной платформы
+    [SerializeField] GameObject platformPrefabVertical; //переменная для префаба вертикальной платформы
+    [SerializeField] GameObject BrokenPlatformPrefab;   //переменная для префаба сломанной платформы
+    [SerializeField] private Transform LeftPoint;   //позиция левой границы экрана
+    [SerializeField] private Transform RightPoint;  //позиция правой границы экрана
 
     void Start()
     {
         Vector3 SpawnerPosition = new Vector3();    // нам нужен новый вектор
 
-        for (int i = 0; i < 20; i++)                // цикл For, который выполняется 10 раз
+        for (int i = 0; i < 20; i++)                // цикл For, который выполняется 20 раз
         {
             SpawnerPosition.x = Random.Range(LeftPoint.position.x, RightPoint.position.x);  // позиция по оси х
             SpawnerPosition.y += Random.Range(.5f, 1.5f);      // позиция по оси у 
 
             Instantiate(platformPrefab, SpawnerPosition, Quaternion.identity);  // создание префабов
-            if (i == 10)
+            if (i == 10) //создание по одному экзмепляру специальных платформ
             {
                 Instantiate(platformPrefabHorizontal, SpawnerPosition, Quaternion.identity);  // создание префабов горизонтальных платформ
                 Instantiate(platformPrefabVertical, SpawnerPosition, Quaternion.identity);  // создание префабов вертикальных платформ

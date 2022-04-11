@@ -144,4 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7db7fb7848c0140a36bac8c89d950a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathMenu: {fileID: 0}
   DoodleRigid: {fileID: 2062035002131871034}
